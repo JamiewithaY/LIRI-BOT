@@ -12,38 +12,50 @@ var Twitter = require('twit');
 //this variable is calling up the twitter api and using my keys to gain access
 var tweet = new Twitter(keys.twitterKeys);
 
+//OMDB - take a title from the user in terminal and return the title, year, rating
+var omdb = require('omdb');
+
+//switch case for the differnt user input options for liri-bot
+var action = process.argv[2];
+//user input for movie input
+var userChoice = process.argv[3];
 
 //function that will be called by user in the terminal if my-tweets is selected
 
 function tweetAway(){
 
- tweet.get("statuses/user_timeline", {screen_name:'rexmanningday1', count: 3}), function(error, tweets,  body){
+ tweet.get("statuses/user_timeline", {screen_name:'rexmanningday1', count: 3}), function(error, tweets, body){
  	if(!error){
  		console.log(error);
 	}else{
 		console.log(tweets);
+		console.log(body);
 		}
 	}
 }
 
-//OMDB - take a title from the user in terminal and return the title, year, rating
-//var omdb = require('omdb');
+// function that will be called to run the omdb request
 //the function needs to take user input, run the request in omdb and return the parameters above
-//function movieTime(){
+function movieTime(){
 
-//omdb.get()
-//}
+omdb.get(userChoice, function(err, movie){
+	if (err){
+		return console.log(err);
+	}
+	console.log(movie.title, movie.year, movie.imbd.rating);
+});
+}
 
 
-//switch case for the differnt options for liri-bot
-var action = process.argv[3];
+
 
 switch(action){
 	case "my-tweets":
 	tweetAway();
-	break
-	// case "movie-title"
-	// movieTime();
+	break;
+	case "movie-title":
+	movieTime();
+	break;
 }
 
 
