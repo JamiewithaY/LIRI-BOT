@@ -10,7 +10,7 @@ var keys = require("./keys.js");
 var Twitter = require('twit');
 
 //this variable is calling up the twitter api and using my keys to gain access
-var tweet = new Twitter(keys);
+var tweet = new Twitter(keys.twitterKeys);
 
 
 //function that will be called by user in the terminal if my-tweets is selected
@@ -27,21 +27,23 @@ function tweetAway(){
 }
 
 //OMDB - take a title from the user in terminal and return the title, year, rating
-var omdb = require('omdb');
+//var omdb = require('omdb');
 //the function needs to take user input, run the request in omdb and return the parameters above
-function movieTime(){
+//function movieTime(){
 
-omdb.get()
-}
+//omdb.get()
+//}
+
 
 //switch case for the differnt options for liri-bot
+var action = process.argv[3];
 
 switch(action){
 	case "my-tweets":
 	tweetAway();
 	break
-	case "movie-title"
-	movieTime();
+	// case "movie-title"
+	// movieTime();
 }
 
 
